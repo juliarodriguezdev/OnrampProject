@@ -25,8 +25,7 @@ class CountrySelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+        updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +41,7 @@ class CountrySelectionViewController: UIViewController {
     }
     
     @IBAction func continueButtonTapped(_ sender: Any) {
+        showDefaultLocationsViewController()
     }
     
     func updateUI() {
@@ -59,10 +59,14 @@ class CountrySelectionViewController: UIViewController {
             delegate?.updateCountrySelection(sender: self, isUSA: false)
             print("Delegate: Country is Interational")
         }
-        
     }
     
-    
+    func showDefaultLocationsViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let defaultLocationsViewController = storyboard.instantiateViewController(identifier: "DefaultLocationsViewController") as? DefaultLocationsViewController else { return }
+        defaultLocationsViewController.inUSA = countryViewModel.fetchIsUSASelected()
+        self.navigationController?.pushViewController(defaultLocationsViewController, animated: true)
+    }
 
     /*
     // MARK: - Navigation

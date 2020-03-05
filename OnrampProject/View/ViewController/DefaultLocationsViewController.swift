@@ -14,6 +14,8 @@ class DefaultLocationsViewController: UIViewController {
     
     var isSearching = false
     
+    var inUSA: Bool?
+    
     var searchResults = [String]()
     
     @IBOutlet weak var searchTextField: UITextField!
@@ -101,24 +103,26 @@ extension DefaultLocationsViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
-        if isSearching {
-           count = searchResults.count
-        } else {
-           count = defaultLocationsViewModel.locations.count
+        let searchText = searchTextField.text?.lowercased()
+        
+        if let checkForUSA = inUSA {
+            let results = defaultLocationsViewModel.displaySearchResults(isSearching: isSearching, inUSA: checkForUSA, searchText: searchText ?? "")
+            count = results.count
         }
+            
         return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "defaultLocationCell", for: indexPath)
         var locationToDisplay: String?
+        let searchText = searchTextField.text?.lowercased()
         
-        if isSearching {
-            locationToDisplay = searchResults[indexPath.row]
-        } else {
-            locationToDisplay = defaultLocationsViewModel.locations[indexPath.row]
-            
+        if let checkForUSA = inUSA {
+            let results = defaultLocationsViewModel.displaySearchResults(isSearching: isSearching, inUSA: checkForUSA, searchText: searchText ?? "")
+            locationToDisplay = results[indexPath.row]
         }
+        
         cell.textLabel?.text = locationToDisplay
         return cell
     }
@@ -140,11 +144,19 @@ extension DefaultLocationsViewController: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        guard let searchText = textField.text?.lowercased() else { return }
+        guard let searchText = textField.text?.lowercased(),
+            let isInUSA = inUSA
+            
+            else { return }
         print("Textfield searchText is: \(searchText)")
         
+        if searchText.isEmpty {
+            isSearching = false
+        } else if searchText.count >= 1 {
+            isSearching = true
+        }
         // populates when searching
-        searchResults = defaultLocationsViewModel.displaySearchResults(isSearching: isSearching, searchText: searchText)
+        searchResults = defaultLocationsViewModel.displaySearchResults(isSearching: isSearching, inUSA: isInUSA, searchText: searchText)
         self.searchTableView.reloadData()
         
     }

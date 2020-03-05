@@ -10,6 +10,8 @@ import UIKit
 class UserLocationViewModel {
     // var to fill view controller content
     
+    var buttonTitle = "Add"
+    
     // MARK: - source of truth
     var savedLocations: [UserLocation] = [] {
         didSet {

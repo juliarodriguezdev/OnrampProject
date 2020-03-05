@@ -20,11 +20,16 @@ class LocationsViewController: UIViewController {
         super.viewDidLoad()
         locationsTableView.delegate = self
         locationsTableView.dataSource = self
+        updateUI()
 
     }
     
     @IBAction func addButtonTapped(_ sender: Any) {
         showCountrySelectionViewController()
+    }
+    
+    func updateUI() {
+        addButton.setTitle(locationsViewModel.buttonTitle, for: .normal)
     }
     
 

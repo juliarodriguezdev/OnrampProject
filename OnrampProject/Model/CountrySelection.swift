@@ -15,7 +15,7 @@ class CountrySelection {
     let continueButton: String
     var isUSA: Bool
     
-    init(message: String = "Select the country of weather", usaSegment: String = "USA", internSegment: String = "International", continueButton: String = "Continue", isUSA: Bool = true) {
+    init(message: String = "Where is the weather located?", usaSegment: String = "USA", internSegment: String = "International", continueButton: String = "Continue", isUSA: Bool = true) {
         self.message = message
         self.usaSegment = usaSegment
         self.internationalSegment = internSegment

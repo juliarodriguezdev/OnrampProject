@@ -10,7 +10,6 @@ import UIKit
 class CountrySelectionViewModel {
     
     private let countryModel = CountrySelection()
-  //  let countryViewController = CountrySelectionViewController()
     
     var message: String {
         return countryModel.message
@@ -26,6 +25,11 @@ class CountrySelectionViewModel {
     
     var buttonTitle: String {
         return countryModel.continueButton
+    }
+    
+    func fetchIsUSASelected() -> Bool {
+        return countryModel.isUSA
+        
     }
 }
 

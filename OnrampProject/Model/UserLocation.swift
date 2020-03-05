@@ -23,6 +23,7 @@ class UserLocation {
     } */
     
 }
+
 extension UserLocation: Equatable {
     static func == (lhs: UserLocation, rhs: UserLocation) -> Bool {
         return lhs.city == rhs.city

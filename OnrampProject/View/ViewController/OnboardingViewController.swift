@@ -27,8 +27,7 @@ class OnboardingViewController: UIViewController {
 
     
     @IBAction func continueButtonTapped(_ sender: Any) {
-        
-        showDefaultLocationsViewController()
+        showSelectCountryViewController()
     }
     
     func updateUI() {
@@ -47,10 +46,12 @@ class OnboardingViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    func showDefaultLocationsViewController() {
+    
+    func showSelectCountryViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let defaultLocationsViewController = storyboard.instantiateViewController(identifier: "DefaultLocationsViewController") as? DefaultLocationsViewController else { return }
-        self.navigationController?.pushViewController(defaultLocationsViewController, animated: true)
+        guard let selectCountryViewController = storyboard.instantiateViewController(identifier: "CountrySelectionViewController") as? CountrySelectionViewController else { return }
+        self.navigationController?.pushViewController(selectCountryViewController, animated: true)
     }
+    
 
 }
