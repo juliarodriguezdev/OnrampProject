@@ -9,9 +9,21 @@ struct DefaultLocation: Codable {
     
     var city: String
     var country: String
+    var coord: Coord
     
     enum CodingKeys: String, CodingKey {
         case city = "name"
         case country
+        case coord
+    }
+}
+
+struct Coord: Codable {
+    var lon: Double
+    var lat: Double
+    
+    enum CodingKeys: String, CodingKey {
+        case lon
+        case lat
     }
 }

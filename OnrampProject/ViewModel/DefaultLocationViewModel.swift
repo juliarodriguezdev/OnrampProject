@@ -14,6 +14,7 @@ class DefaultLocationViewModel {
     //source of truth
     var locations: [String] = []
     
+    
     var filePath = Bundle.main.url(forResource: "city.list", withExtension: "json")
     
     init() {
@@ -27,11 +28,27 @@ class DefaultLocationViewModel {
         do {
             let data = try Data(contentsOf: filePathURL)
             let locationResults = try decoder.decode([DefaultLocation].self, from: data)
-            let fetchedLocations = locationResults.compactMap{ $0.city + ", " + $0.country}
+            let fetchedLocations = locationResults.filter({$0.city != ""}).filter({$0.city != "-"}).compactMap{ $0.city + ", " + (NSLocale.current.localizedString(forRegionCode: $0.country) ?? "")}.sorted()
             self.locations = fetchedLocations
         } catch {
             print("Error in \(#function) : \(error.localizedDescription) /n---/n \(error)")
         }
+    }
+    
+    func displaySearchResults(isSearching: Bool, searchText: String) -> [String] {
+        var results = [String]()
+        // if true
+        
+        if isSearching {
+            var count = searchText.count
+            let searchResults = locations.filter({$0.prefix(count).lowercased() == searchText}).sorted()
+            results = searchResults
+            
+
+        } else {
+            results = locations
+        }
+        return results
     }
     
     // CRUD
