@@ -11,7 +11,6 @@ class OrangeButton: UIButton {
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpUI()
-        
     }
     
     func updateFont(to fontName: String) {
