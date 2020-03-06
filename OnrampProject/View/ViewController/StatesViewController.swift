@@ -60,7 +60,8 @@ class StatesViewController: UIViewController {
     // MARK: - User Interface (UI) functions
     func updateUI() {
         continueButton.setTitle(HelperUI.init().continueText, for: .normal)
-        searchTextField.placeholder = HelperUI.init().placeholderText
+        searchTextField.placeholder = HelperUI.init().statePlaceholderText
+        statesLabel.text = HelperUI.init().stateText
     }
 
     func addDoneButtonOnKeyboard() {
