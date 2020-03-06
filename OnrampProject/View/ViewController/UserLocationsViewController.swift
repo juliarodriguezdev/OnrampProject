@@ -65,10 +65,8 @@ extension UserLocationsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as? UserLocationsTableViewCell else { return UITableViewCell() }
         let location = locationsViewModel.userPlaces[indexPath.row]
-        //cell.place = location
         cell.loadTemperatureData(withPlace: location)
         cell.locationLabel.text = location
-        
         return cell
         
     }

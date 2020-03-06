@@ -9,7 +9,6 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
     
-   // var viewModel = OnboardingViewModel!()
     let onboardingViewModel = OnboardingViewModel()
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -21,10 +20,7 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        
-        // Do any additional setup after loading the view.
     }
-
     
     @IBAction func continueButtonTapped(_ sender: Any) {
         showSelectCountryViewController()
@@ -34,18 +30,9 @@ class OnboardingViewController: UIViewController {
         titleLabel.text = onboardingViewModel.title
         messageLabel.text = onboardingViewModel.message
         buttonText.setTitle(onboardingViewModel.buttonTitle, for: .normal)
-        
     }
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func showSelectCountryViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

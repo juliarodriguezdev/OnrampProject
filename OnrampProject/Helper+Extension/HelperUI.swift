@@ -13,12 +13,16 @@ class HelperUI {
     let addText: String
     let homeText: String
     let placeholderText: String
+    let invalidEntryText: String
+    let invalideEntryMessage: String
     
-    init(continueText: String = "Continue", addText: String = "Add", homeText: String = "Home", placeholderText: String = "Begin typing city here...") {
+    init(continueText: String = "Continue", addText: String = "Add", homeText: String = "Home", placeholderText: String = "Begin typing city here...", invalidEntryText: String = "Invalid Entry", invalidEntryMessage: String = "Invalid location entry, please select from the provided locations") {
         self.continueText = continueText
         self.addText = addText
         self.homeText = homeText
         self.placeholderText = placeholderText
+        self.invalidEntryText = invalidEntryText
+        self.invalideEntryMessage = invalidEntryMessage
     }
     
     static func configShadowForView(viewName: UIView, cornerRadius: CGFloat,  shadowRadius: CGFloat) {

@@ -9,14 +9,12 @@ import UIKit
 
 class StatesViewController: UIViewController {
     
+    var isSearching = false
+    var userSelectedFromList = false
+    var selectedCity: String?
+    
     let statesViewModel = StatesViewModel()
     let userLocationsViewModel = UserLocationViewModel()
-    
-    var isSearching = false
-    
-    var userSelectedFromList = false
-    
-    var selectedCity: String?
     
     @IBOutlet weak var statesLabel: UILabel!
     
@@ -42,7 +40,6 @@ class StatesViewController: UIViewController {
         if let cityName = selectedCity,
             let stateSearchText = searchTextField.text, !stateSearchText.isEmpty, userSelectedFromList {
             userLocationsViewModel.createLocationWith(city: cityName, place: stateSearchText)
-            // push to weather view controller
             let place = userLocationsViewModel.generateUserPlaceString(city: cityName, place: stateSearchText)
             showWeatherResultsViewController(userPlace: place)
         } else {
@@ -60,6 +57,7 @@ class StatesViewController: UIViewController {
         searchTextField.resignFirstResponder()
     }
     
+    // MARK: - User Interface (UI) functions
     func updateUI() {
         continueButton.setTitle(HelperUI.init().continueText, for: .normal)
         searchTextField.placeholder = HelperUI.init().placeholderText
@@ -86,12 +84,12 @@ class StatesViewController: UIViewController {
         self.present(alertController, animated: true)
     }
     
+    // MARK: - Navigation
     func showWeatherResultsViewController(userPlace: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let weatherResultsViewController = storyboard.instantiateViewController(identifier: "WeatherViewController") as? WeatherViewController else { return }
         weatherResultsViewController.userPlace = userPlace
         self.navigationController?.pushViewController(weatherResultsViewController, animated: true)
-        
     }
 }
 
@@ -123,7 +121,6 @@ extension StatesViewController: UITableViewDelegate, UITableViewDataSource {
         let searchText = searchTextField.text?.lowercased()
         
         let results = statesViewModel.dispayStatesSearchResults(isSearching: isSearching, searchText: searchText ?? "")
-        
         return results.count
     }
     
@@ -131,10 +128,11 @@ extension StatesViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stateCell", for: indexPath)
         
         let searchText = searchTextField.text?.lowercased()
-        
         let results = statesViewModel.dispayStatesSearchResults(isSearching: isSearching, searchText: searchText ?? "")
         let stateToDisplay = results[indexPath.row]
+        
         cell.textLabel?.text = stateToDisplay
+        cell.textLabel?.font = UIFont(name: FontNames.avenirBook, size: 16)
         return cell
         
     }

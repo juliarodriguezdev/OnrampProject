@@ -9,15 +9,13 @@ import UIKit
 
 class DefaultLocationsViewController: UIViewController {
     
+    var isSearching = false
+    var userSelectedFromList = false
+    var inUSA: Bool?
+    
     let defaultLocationsViewModel = DefaultLocationViewModel()
     let userLocationsViewModel = UserLocationViewModel()
     
-    var isSearching = false
-    
-    var userSelectedFromList = false
-    
-    var inUSA: Bool?
-        
     @IBOutlet weak var searchTextField: UITextField!
     
     @IBOutlet weak var searchTableView: UITableView!
@@ -33,28 +31,25 @@ class DefaultLocationsViewController: UIViewController {
         self.searchTextField.addTarget(self, action: #selector(searching), for: .touchDown)
         self.addDoneButtonOnKeyboard()
         updateUI()
-
+        
     }
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
         // get info from textfield
         guard let selectedLocation = searchTextField.text, !selectedLocation.isEmpty, userSelectedFromList else {
-            presentUIHelperAlert(title: "Invalid Entry", message: "Invalid location entry, please select from the provided locations")
+            presentUIHelperAlert(title: HelperUI.init().invalidEntryText, message: HelperUI.init().invalideEntryMessage)
             searchTextField.text = ""
             return
         }
         if inUSA == true {
             showStatesViewController(userCity: selectedLocation)
-        
+            
         } else {
-            // create userLocation object to save to viewmodel
             let locationArray = selectedLocation.components(separatedBy: ", ")
             let city = locationArray[0]
             let country = locationArray[1]
-            // verify source of truth gets updated
             userLocationsViewModel.createLocationWith(city: city, place: country)
             let userSelectedPlace = userLocationsViewModel.generateUserPlaceString(city: city, place: country)
-            // push next view controller: show the main weather to display
             showWeatherResultsViewController(userPlace: userSelectedPlace )
         }
     }
@@ -66,6 +61,8 @@ class DefaultLocationsViewController: UIViewController {
     @objc func doneButtonAction() {
         searchTextField.resignFirstResponder()
     }
+    
+    // MARK: - User Inferface (UI) functions
     
     func updateUI() {
         confirmButton.setTitle(HelperUI.init().continueText, for: .normal)
@@ -92,6 +89,8 @@ class DefaultLocationsViewController: UIViewController {
         alertController.addAction(okayAction)
         self.present(alertController, animated: true)
     }
+    
+    // MARK: - Navigation
     
     func showStatesViewController(userCity: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -122,32 +121,30 @@ extension DefaultLocationsViewController: UITableViewDataSource, UITableViewDele
             let results = defaultLocationsViewModel.displaySearchResults(isSearching: isSearching, inUSA: checkForUSA, searchText: searchText ?? "")
             count = results.count
         }
-            
+        
         return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "defaultLocationCell", for: indexPath)
+        
         var locationToDisplay: String?
         let searchText = searchTextField.text?.lowercased()
-        
         if let checkForUSA = inUSA {
             let results = defaultLocationsViewModel.displaySearchResults(isSearching: isSearching, inUSA: checkForUSA, searchText: searchText ?? "")
             locationToDisplay = results[indexPath.row]
-
         }
         
         cell.textLabel?.text = locationToDisplay
+        cell.textLabel?.font = UIFont(name: FontNames.avenirBook, size: 16)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        
         guard let locationText = cell?.textLabel?.text, !locationText.isEmpty else { return }
         searchTextField.text = locationText
         userSelectedFromList = true
-        print("didSelectRowAt: \(locationText)")
         searchTextField.resignFirstResponder()
     }
 }
@@ -162,7 +159,6 @@ extension DefaultLocationsViewController: UITextFieldDelegate {
         guard let searchText = textField.text?.lowercased()
             
             else { return }
-        print("Textfield searchText is: \(searchText)")
         
         if searchText.isEmpty {
             isSearching = false

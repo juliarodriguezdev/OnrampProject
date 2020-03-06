@@ -19,7 +19,6 @@ class StatesViewModel {
         return stateModel.buttonTitle
     }
     
-
     func dispayStatesSearchResults(isSearching: Bool, searchText: String) -> [String] {
         var results = [String]()
         let count = searchText.count
@@ -30,10 +29,9 @@ class StatesViewModel {
             results = searchResults
         } else {
             results = statesDictionary.sorted()
-            
         }
-        return results
         
+        return results
     }
 }
 

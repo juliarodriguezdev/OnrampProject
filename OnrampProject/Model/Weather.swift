@@ -39,7 +39,6 @@ struct Main: Codable {
         case groundLevel = "grnd_level"
         case humidity
     }
-    
 }
 
 struct WeatherSubDetails: Codable {
@@ -52,7 +51,6 @@ struct WeatherSubDetails: Codable {
         case description
         case icon
     }
-    
 }
 
 struct Wind: Codable {

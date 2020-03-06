@@ -9,15 +9,11 @@ import UIKit
 
 class DefaultLocationViewModel {
     
-    // add singleton here or at ViewController, create an instance of viewmodel
-    
-    //source of truth
     var locations: [String] = []
     
     private var rawLocations: [DefaultLocation] = []
     
     private var finalRawLocations: [DefaultLocation] {
-        // test "("
         return rawLocations.filter({$0.city != ""}).filter({$0.city != "-"})
     }
     
@@ -42,8 +38,6 @@ class DefaultLocationViewModel {
         do {
             let data = try Data(contentsOf: filePathURL)
             let locationResults = try decoder.decode([DefaultLocation].self, from: data)
-            
-            //let fetchedLocations = locationResults.filter({$0.city != ""}).filter({$0.city != "-"}).compactMap{ $0.city + ", " + (NSLocale.current.localizedString(forRegionCode: $0.country) ?? "")}.sorted()
             self.rawLocations = locationResults
         } catch {
             print("Error in \(#function) : \(error.localizedDescription) /n---/n \(error)")
@@ -55,28 +49,23 @@ class DefaultLocationViewModel {
         let count = searchText.count
         
         if isSearching, inUSA {
-            // show city
             let criteriaResults = Array(Set(usaLocations.compactMap({$0.city})))
             let searchResults = criteriaResults.filter({$0.prefix(count).lowercased() == searchText}).sorted()
-           results = searchResults
-
+            results = searchResults
+            
         } else if isSearching, !inUSA {
-            // show city, country
             let criteriaResults = Array(Set(internationLocations.compactMap({$0.city + ", " + (NSLocale.current.localizedString(forRegionCode: $0.country) ?? "")})))
             let searchResults = criteriaResults.filter({$0.prefix(count).lowercased() == searchText}).sorted()
             results = searchResults
         } else if !isSearching, inUSA {
-            //show all usa cities
             let criteriaResults = Array(Set(usaLocations.compactMap({$0.city}))).sorted()
             results = criteriaResults
             
         } else if !isSearching, !inUSA {
-            // show city, country
             let criteriaResults = Array(Set(internationLocations.compactMap({$0.city + ", " + (NSLocale.current.localizedString(forRegionCode: $0.country) ?? "")}))).sorted()
             results = criteriaResults
-            
         }
+        
         return results
     }
-
 }

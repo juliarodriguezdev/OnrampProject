@@ -13,19 +13,17 @@ class OnboardingViewModel {
     
     var title: String {
         return onboardingModel.introTitle
-      }
-      
-      var message: String {
-          return onboardingModel.introMessage
-      }
-      
-      var buttonTitle: String {
-          return onboardingModel.buttonTitle
-      }
+    }
+    
+    var message: String {
+        return onboardingModel.introMessage
+    }
+    
+    var buttonTitle: String {
+        return onboardingModel.buttonTitle
+    }
     
     func setFirstLaunchToTrue() {
         UserDefaults.standard.set(true, forKey: UserDefaultKeys.firstLaunchKey)
     }
-    
-    
 }

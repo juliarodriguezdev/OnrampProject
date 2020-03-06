@@ -16,7 +16,6 @@ class UserLocation {
     let buttonTitle: String
     let placeholderText: String
     
-    
     init(city: String, place: String, buttonTitle: String = "Add", placeholderText: String = "Start typing city here...") {
         self.city = city
         self.place = place

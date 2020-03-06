@@ -24,7 +24,6 @@ class CountrySelectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        // default
         selectionSegmentedControl.selectedSegmentIndex = 0
         updateCountrySelection()
     }
@@ -38,6 +37,8 @@ class CountrySelectionViewController: UIViewController {
         showDefaultLocationsViewController()
     }
     
+    // MARK: - User Interface (UI) function
+    
     func updateUI() {
         selectionLabel.text = countryViewModel.message
         selectionSegmentedControl.setTitle(countryViewModel.segmentZero, forSegmentAt: 0)
@@ -49,6 +50,8 @@ class CountrySelectionViewController: UIViewController {
         selectionSegmentedControl.setTitle(countryViewModel.segmentOne, forSegmentAt: 1)
     }
     
+    // MARK: - Segmented Control function
+    
     func updateCountrySelection() {
         if selectionSegmentedControl.selectedSegmentIndex == 0 {
             countryViewModel.updateCountryModelSelection(isInUSA: true)
@@ -59,6 +62,7 @@ class CountrySelectionViewController: UIViewController {
         }
     }
     
+    // MARK: - Navigation 
     func showDefaultLocationsViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let defaultLocationsViewController = storyboard.instantiateViewController(identifier: "DefaultLocationsViewController") as? DefaultLocationsViewController else { return }

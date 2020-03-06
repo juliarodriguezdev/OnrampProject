@@ -12,9 +12,10 @@ private let apiKey = "0a22a03c9a9015c59e9463a9bd2532aa"
 class WeatherViewModel {
     
     var results: [WeatherDetails] = []
-        
+    
     let baseURL = URL(string: "https://api.openweathermap.org/data/2.5/forecast")
     
+    // MARK: - REST API Call
     func fetchFiveDayWeatherForecast(userPlace: String, completion: @escaping ([WeatherDetails]?)-> Void) {
         guard let url = baseURL else { completion(nil); return }
         
@@ -61,12 +62,11 @@ class WeatherViewModel {
             }
         }
     }
+    
     func todaysWeatherImage(weather: WeatherDetails) -> String {
-        // results[first] passed in
-        // TODO: add sad face cloud for no results
         return weather.weather.first?.icon ?? ""
-
     }
+    
     func todaysWeatherTemp(weather: WeatherDetails) -> String {
         let temperatureInt = Int(weather.main.temp.rounded())
         return "\(temperatureInt)ºF"
@@ -84,7 +84,6 @@ class WeatherViewModel {
     
     func indexTimeStamp(weather: WeatherDetails) -> String {
         let timeStamp = weather.timestampOfForecast
-        
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         guard let timeSnapshot = formatter.date(from: timeStamp) else { return ""}
@@ -94,9 +93,7 @@ class WeatherViewModel {
     
     func indexTemperature(weather: WeatherDetails) -> String {
         let temp = Int(weather.main.temp.rounded())
-
         return "\(temp)ºF"
-        
     }
 }
 

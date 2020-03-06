@@ -153,15 +153,12 @@
 		6030FC6E23FF0C79007F0901 /* OnrampProject */ = {
 			isa = PBXGroup;
 			children = (
-				6A82F589240DE4F30028B7D4 /* Resources */,
-				6A82F58A240DE50E0028B7D4 /* View */,
 				6A82F584240DDE780028B7D4 /* Model */,
 				6A82F58F240DF50E0028B7D4 /* ViewModel */,
-				6ABFAA3E2410793B00E7A737 /* UserDefaults.swift */,
-				6A3329972410CF4B000DBCB1 /* HelperUI.swift */,
-				6A39D1E624117E1A001368ED /* StateHelper.swift */,
-				6A1F5EBC24120CD400353FAA /* StyleGuide.swift */,
-				6A1F5EC1241222D400353FAA /* OrangeButton.swift */,
+				6A82F58A240DE50E0028B7D4 /* View */,
+				6A82F589240DE4F30028B7D4 /* Resources */,
+				6A1F5EC524123C4800353FAA /* Helper+Extension */,
+				6A1F5EC424123C3800353FAA /* CustomUI */,
 			);
 			path = OnrampProject;
 			sourceTree = "<group>";
@@ -184,18 +181,44 @@
 			path = OnrampProjectUITests;
 			sourceTree = "<group>";
 		};
+		6A1F5EC324123A9D00353FAA /* ViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6A980EF92410AB4800E31FCC /* UserLocationsTableViewCell.swift */,
+				6AFDD4F22411CA440091A818 /* WeatherTableViewCell.swift */,
+			);
+			path = ViewCell;
+			sourceTree = "<group>";
+		};
+		6A1F5EC424123C3800353FAA /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				6A1F5EBC24120CD400353FAA /* StyleGuide.swift */,
+				6A1F5EC1241222D400353FAA /* OrangeButton.swift */,
+			);
+			path = CustomUI;
+			sourceTree = "<group>";
+		};
+		6A1F5EC524123C4800353FAA /* Helper+Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6ABFAA3E2410793B00E7A737 /* UserDefaults.swift */,
+				6A3329972410CF4B000DBCB1 /* HelperUI.swift */,
+				6A39D1E624117E1A001368ED /* StateHelper.swift */,
+			);
+			path = "Helper+Extension";
+			sourceTree = "<group>";
+		};
 		6A2500A8241074B700EC1FE5 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				6ABFAA4024107EA500E7A737 /* LaunchViewController.swift */,
 				6A2500A6241074B200EC1FE5 /* OnboardingViewController.swift */,
 				6A211D4B2410AA73003964E9 /* UserLocationsViewController.swift */,
-				6A980EF92410AB4800E31FCC /* UserLocationsTableViewCell.swift */,
 				6A2958F42410B01100BB4FD1 /* DefaultLocationsViewController.swift */,
 				6A33299D2410D9B7000DBCB1 /* CountrySelectionViewController.swift */,
 				6A16444424117C4A00A13BDB /* StatesViewController.swift */,
 				6AFDD4F02411CA2D0091A818 /* WeatherViewController.swift */,
-				6AFDD4F22411CA440091A818 /* WeatherTableViewCell.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -219,9 +242,9 @@
 				6030FC6F23FF0C79007F0901 /* AppDelegate.swift */,
 				6030FC7123FF0C79007F0901 /* SceneDelegate.swift */,
 				6030FC7823FF0C7A007F0901 /* Assets.xcassets */,
+				6A1F5EBF24120D5100353FAA /* Colors.xcassets */,
 				6A82F587240DE2AE0028B7D4 /* city.list.json */,
 				6030FC7D23FF0C7A007F0901 /* Info.plist */,
-				6A1F5EBF24120D5100353FAA /* Colors.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -232,6 +255,7 @@
 				6030FC7523FF0C79007F0901 /* Main.storyboard */,
 				6030FC7A23FF0C7A007F0901 /* LaunchScreen.storyboard */,
 				6A2500A8241074B700EC1FE5 /* ViewController */,
+				6A1F5EC324123A9D00353FAA /* ViewCell */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -16,6 +16,7 @@ extension UIView {
 struct FontNames {
     static let avenirHeavy = "Avenir-Heavy"
     static let avenirBook = "Avenir-Book"
+    static let avenirMedium = "Avenir-Medium"
 }
 
 extension UIColor {

@@ -9,11 +9,10 @@ import UIKit
 
 class WeatherViewController: UIViewController {
     
+    var userPlace: String?
+    
     let weatherViewModel = WeatherViewModel()
     
-    // landing pad
-    var userPlace: String?
-        
     @IBOutlet weak var placeLabel: UILabel!
     
     @IBOutlet weak var backgroundView: UIView!
@@ -32,7 +31,7 @@ class WeatherViewController: UIViewController {
         weatherTableView.dataSource = self
         HelperUI.configShadowForView(viewName: backgroundView, cornerRadius: 25, shadowRadius: 15)
         updateUI()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,13 +48,8 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    
     @IBAction func homeButtonTapped(_ sender: Any) {
         showUserPlacesViewController()
-    }
-    
-    func updateUI() {
-        homeButton.setTitle(HelperUI.init().homeText, for: .normal)
     }
     
     func updateTodaysWeather() {
@@ -67,13 +61,18 @@ class WeatherViewController: UIViewController {
         }
     }
     
+    // MARK: - User Interface (UI) function
+    func updateUI() {
+        homeButton.setTitle(HelperUI.init().homeText, for: .normal)
+    }
+    
+    // MARK: - Navigation
     func showUserPlacesViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let userPlacesViewController = storyboard.instantiateViewController(identifier: "UserLocationsViewController") as? UserLocationsViewController else { return }
-        // TODO: check if its on the stack, if so for loop to VC, pop to existing VC on stack
         self.navigationController?.pushViewController(userPlacesViewController, animated: true)
     }
-
+    
 }
 
 extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
@@ -87,17 +86,14 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as? WeatherTableViewCell else { return UITableViewCell() }
+        
         let weather = weatherViewModel.results[indexPath.row]
         
         cell.weatherIcon.image = UIImage(named: weatherViewModel.indexImageName(weather: weather))
-    
         cell.descriptionLabel.text = weatherViewModel.indexDescription(weather: weather)
         cell.timeDateLabel.text = weatherViewModel.indexTimeStamp(weather: weather)
         cell.temperatureLabel.text = weatherViewModel.indexTemperature(weather: weather)
         
         return cell
-        
     }
-    
-    
 }
