@@ -16,7 +16,7 @@ class OnboardingViewController: UIViewController {
     
     @IBOutlet weak var messageLabel: UILabel!
     
-    @IBOutlet weak var buttonText: UIButton!
+    @IBOutlet weak var buttonText: OrangeButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

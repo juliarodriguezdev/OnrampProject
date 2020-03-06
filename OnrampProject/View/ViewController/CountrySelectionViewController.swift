@@ -15,7 +15,7 @@ class CountrySelectionViewController: UIViewController {
     
     @IBOutlet weak var selectionSegmentedControl: UISegmentedControl!
     
-    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var continueButton: OrangeButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +43,10 @@ class CountrySelectionViewController: UIViewController {
         selectionSegmentedControl.setTitle(countryViewModel.segmentZero, forSegmentAt: 0)
         selectionSegmentedControl.setTitle(countryViewModel.segmentOne, forSegmentAt: 1)
         continueButton.setTitle(countryViewModel.buttonTitle, for: .normal)
+        let avenirSizedFont = UIFont(name: FontNames.avenirBook, size: 15)
+        selectionSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: avenirSizedFont!], for: .normal)
+        selectionSegmentedControl.setTitle(countryViewModel.segmentZero, forSegmentAt: 0)
+        selectionSegmentedControl.setTitle(countryViewModel.segmentOne, forSegmentAt: 1)
     }
     
     func updateCountrySelection() {
@@ -61,16 +65,6 @@ class CountrySelectionViewController: UIViewController {
         defaultLocationsViewController.inUSA = countryViewModel.fetchIsUSASelected()
         self.navigationController?.pushViewController(defaultLocationsViewController, animated: true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
     

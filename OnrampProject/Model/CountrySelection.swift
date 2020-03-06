@@ -14,12 +14,14 @@ class CountrySelection {
     let internationalSegment: String
     let continueButton: String
     var isUSA: Bool
+    let buttonTitle: String
     
-    init(message: String = "Where is the weather located?", usaSegment: String = "USA", internSegment: String = "International", continueButton: String = "Continue", isUSA: Bool = true) {
+    init(message: String = "Where is the weather located?", usaSegment: String = "USA", internSegment: String = "International", continueButton: String = "Continue", isUSA: Bool = true, buttonTitle: String = "Continue") {
         self.message = message
         self.usaSegment = usaSegment
         self.internationalSegment = internSegment
         self.continueButton = continueButton
         self.isUSA = isUSA
+        self.buttonTitle = buttonTitle
     }
 }

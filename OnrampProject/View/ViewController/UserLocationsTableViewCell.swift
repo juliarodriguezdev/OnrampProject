@@ -22,7 +22,7 @@ class UserLocationsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        HelperUI.configShadowForView(viewName: colorStripView, cornerRadius: 2, shadowRadius: 4)
+        HelperUI.configShadowForView(viewName: colorStripView, cornerRadius: 2, shadowRadius: 6)
     }
     
     func loadTemperatureData(withPlace: String) {
@@ -71,11 +71,4 @@ class UserLocationsTableViewCell: UITableViewCell {
             }
         }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

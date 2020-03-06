@@ -18,12 +18,12 @@ class LaunchViewController: UIViewController {
         } else {
             print("First Launch")
             UserDefaults.standard.set(true, forKey: UserDefaultKeys.firstLaunchKey)
-            // navigate to Onboarding VC
             showOnboardingViewController()
             
         }
     }
     
+    // MARK: - Navigation 
     func showOnboardingViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let onboardingViewController = storyboard.instantiateViewController(identifier: "OnboardingViewController") as? OnboardingViewController else { return }

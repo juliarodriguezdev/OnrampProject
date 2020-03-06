@@ -14,6 +14,8 @@ class StatesViewController: UIViewController {
     
     var isSearching = false
     
+    var userSelectedFromList = false
+    
     var selectedCity: String?
     
     @IBOutlet weak var statesLabel: UILabel!
@@ -22,7 +24,7 @@ class StatesViewController: UIViewController {
     
     @IBOutlet weak var statesTableView: UITableView!
     
-    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var continueButton: OrangeButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,19 +33,21 @@ class StatesViewController: UIViewController {
         searchTextField.delegate = self
         self.searchTextField.addTarget(self, action: #selector(searching), for: .touchDown)
         self.addDoneButtonOnKeyboard()
+        updateUI()
 
     }
     
     @IBAction func continueButtonTapped(_ sender: Any) {
         
         if let cityName = selectedCity,
-            let stateSearchText = searchTextField.text, !stateSearchText.isEmpty {
+            let stateSearchText = searchTextField.text, !stateSearchText.isEmpty, userSelectedFromList {
             userLocationsViewModel.createLocationWith(city: cityName, place: stateSearchText)
             // push to weather view controller
             let place = userLocationsViewModel.generateUserPlaceString(city: cityName, place: stateSearchText)
             showWeatherResultsViewController(userPlace: place)
         } else {
-            presentUIHelperAlert(title: "Missing Info", message: "Please select a state, and try again")
+            presentUIHelperAlert(title: "Invalid Entry", message: "Please select a state provided, and try again")
+            searchTextField.text = ""
             return
         }
     }
@@ -55,6 +59,11 @@ class StatesViewController: UIViewController {
     @objc func doneButtonAction() {
         searchTextField.resignFirstResponder()
     }
+    
+    func updateUI() {
+        continueButton.setTitle(HelperUI.init().continueText, for: .normal)
+        searchTextField.placeholder = HelperUI.init().placeholderText
+    }
 
     func addDoneButtonOnKeyboard() {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
@@ -62,7 +71,7 @@ class StatesViewController: UIViewController {
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let done = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButtonAction))
-        done.tintColor = .systemBlue
+        done.tintColor = UIColor.customLightOrange
         let items = [flexibleSpace, done]
         doneToolbar.items = items
         doneToolbar.sizeToFit()
@@ -84,17 +93,6 @@ class StatesViewController: UIViewController {
         self.navigationController?.pushViewController(weatherResultsViewController, animated: true)
         
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension StatesViewController: UITextFieldDelegate {
@@ -108,6 +106,7 @@ extension StatesViewController: UITextFieldDelegate {
         
         if searchText.isEmpty {
             isSearching = false
+            userSelectedFromList = false
         } else {
             isSearching = true
         }
@@ -145,6 +144,7 @@ extension StatesViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let stateText = cell?.textLabel?.text, !stateText.isEmpty else { return }
         searchTextField.text = stateText
+        userSelectedFromList = true
         searchTextField.resignFirstResponder()
     }
 

@@ -78,7 +78,5 @@ class DefaultLocationViewModel {
         }
         return results
     }
-    
-    // CRUD
 
 }

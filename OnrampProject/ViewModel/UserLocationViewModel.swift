@@ -8,18 +8,10 @@
 import UIKit
 
 class UserLocationViewModel {
-    // var to fill view controller content
     
-    var buttonTitle = "Add"
     let defaults = UserDefaults.standard
     
-    // MARK: - source of truth
-    var userPlaces: [String] = [] {
-        didSet {
-            //print("savedLocations has changed, notify delegate")
-            // reload the table view
-        }
-    }
+    var userPlaces: [String] = []
     
     init() {
         loadFromPersistnetStore()

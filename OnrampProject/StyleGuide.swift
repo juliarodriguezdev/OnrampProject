@@ -7,6 +7,17 @@
 
 import UIKit
 
+extension UIView {
+    func addCornerRadius(_ radius: CGFloat = 10) {
+        self.layer.cornerRadius = radius
+    }
+}
+
+struct FontNames {
+    static let avenirHeavy = "Avenir-Heavy"
+    static let avenirBook = "Avenir-Book"
+}
+
 extension UIColor {
     static let customBrightBlue = UIColor(named: "customBrightBlue")
     static let customLightBlue = UIColor(named: "customLightBlue")

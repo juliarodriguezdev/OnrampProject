@@ -9,12 +9,11 @@ import UIKit
 
 class UserLocationsViewController: UIViewController {
     
-    // add view model
     let locationsViewModel = UserLocationViewModel()
     
     @IBOutlet weak var locationsTableView: UITableView!
     
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addButton: OrangeButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +31,11 @@ class UserLocationsViewController: UIViewController {
     }
     
     func updateUI() {
-        addButton.setTitle(locationsViewModel.buttonTitle, for: .normal)
+        addButton.setTitle(HelperUI.init().addText, for: .normal)
     }
-    
-
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let index = locationsTableView.indexPathForSelectedRow,
             let destinationVC = segue.destination as? WeatherViewController else { return }
@@ -59,7 +55,7 @@ class UserLocationsViewController: UIViewController {
 extension UserLocationsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        return 95
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -24,13 +24,14 @@ class WeatherViewController: UIViewController {
     
     @IBOutlet weak var weatherTableView: UITableView!
     
-    @IBOutlet weak var homeButton: UIButton!
+    @IBOutlet weak var homeButton: OrangeButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         weatherTableView.delegate = self
         weatherTableView.dataSource = self
         HelperUI.configShadowForView(viewName: backgroundView, cornerRadius: 25, shadowRadius: 15)
+        updateUI()
 
     }
     
@@ -46,7 +47,15 @@ class WeatherViewController: UIViewController {
                 }
             }
         }
-        //weatherViewModel.loadWeatherDetails(place: place)
+    }
+    
+    
+    @IBAction func homeButtonTapped(_ sender: Any) {
+        showUserPlacesViewController()
+    }
+    
+    func updateUI() {
+        homeButton.setTitle(HelperUI.init().homeText, for: .normal)
     }
     
     func updateTodaysWeather() {
@@ -57,22 +66,6 @@ class WeatherViewController: UIViewController {
             todaysTempLabel.text = weatherViewModel.todaysWeatherTemp(weather: todaysWeather)
         }
     }
-    
-    @IBAction func homeButtonTapped(_ sender: Any) {
-        showUserPlacesViewController()
-    }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func showUserPlacesViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

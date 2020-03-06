@@ -14,13 +14,15 @@ class DefaultLocationsViewController: UIViewController {
     
     var isSearching = false
     
+    var userSelectedFromList = false
+    
     var inUSA: Bool?
         
     @IBOutlet weak var searchTextField: UITextField!
     
     @IBOutlet weak var searchTableView: UITableView!
     
-    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var confirmButton: OrangeButton!
     
     
     override func viewDidLoad() {
@@ -30,13 +32,15 @@ class DefaultLocationsViewController: UIViewController {
         searchTextField.delegate = self
         self.searchTextField.addTarget(self, action: #selector(searching), for: .touchDown)
         self.addDoneButtonOnKeyboard()
+        updateUI()
 
     }
     
     @IBAction func confirmButtonTapped(_ sender: Any) {
         // get info from textfield
-        guard let selectedLocation = searchTextField.text, !selectedLocation.isEmpty else {
-            presentUIHelperAlert(title: "Missing Info", message: "Invalid loaction entry, please select a city, country")
+        guard let selectedLocation = searchTextField.text, !selectedLocation.isEmpty, userSelectedFromList else {
+            presentUIHelperAlert(title: "Invalid Entry", message: "Invalid location entry, please select from the provided locations")
+            searchTextField.text = ""
             return
         }
         if inUSA == true {
@@ -63,13 +67,18 @@ class DefaultLocationsViewController: UIViewController {
         searchTextField.resignFirstResponder()
     }
     
+    func updateUI() {
+        confirmButton.setTitle(HelperUI.init().continueText, for: .normal)
+        searchTextField.placeholder = HelperUI.init().placeholderText
+    }
+    
     func addDoneButtonOnKeyboard() {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = .default
         
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let done = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButtonAction))
-        done.tintColor = .systemBlue
+        done.tintColor = UIColor.customLightOrange
         let items = [flexibleSpace, done]
         doneToolbar.items = items
         doneToolbar.sizeToFit()
@@ -98,19 +107,6 @@ class DefaultLocationsViewController: UIViewController {
         self.navigationController?.pushViewController(weatherResultsViewController, animated: true)
         
     }
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension DefaultLocationsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -150,6 +146,7 @@ extension DefaultLocationsViewController: UITableViewDataSource, UITableViewDele
         
         guard let locationText = cell?.textLabel?.text, !locationText.isEmpty else { return }
         searchTextField.text = locationText
+        userSelectedFromList = true
         print("didSelectRowAt: \(locationText)")
         searchTextField.resignFirstResponder()
     }
@@ -169,11 +166,10 @@ extension DefaultLocationsViewController: UITextFieldDelegate {
         
         if searchText.isEmpty {
             isSearching = false
-        } else if searchText.count >= 1 {
+            userSelectedFromList = false
+        } else {
             isSearching = true
         }
-        // populates when searching
-        //searchResults = defaultLocationsViewModel.displaySearchResults(isSearching: isSearching, inUSA: isInUSA, searchText: searchText)
         self.searchTableView.reloadData()
         
     }

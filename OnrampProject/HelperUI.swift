@@ -9,6 +9,18 @@ import UIKit
 
 class HelperUI {
     
+    let continueText: String
+    let addText: String
+    let homeText: String
+    let placeholderText: String
+    
+    init(continueText: String = "Continue", addText: String = "Add", homeText: String = "Home", placeholderText: String = "Begin typing city here...") {
+        self.continueText = continueText
+        self.addText = addText
+        self.homeText = homeText
+        self.placeholderText = placeholderText
+    }
+    
     static func configShadowForView(viewName: UIView, cornerRadius: CGFloat,  shadowRadius: CGFloat) {
         viewName.layer.cornerRadius = cornerRadius
         viewName.layer.shadowColor = UIColor.black.cgColor
@@ -19,6 +31,8 @@ class HelperUI {
         viewName.layer.shouldRasterize = true
         viewName.layer.rasterizationScale = UIScreen.main.scale
     }
+    
+    
 }
 
 
