@@ -51,8 +51,9 @@ class DefaultLocationsViewController: UIViewController {
             let country = locationArray[1]
             // verify source of truth gets updated
             userLocationsViewModel.createLocationWith(city: city, place: country)
-            
+            let userSelectedPlace = userLocationsViewModel.generateUserPlaceString(city: city, place: country)
             // push next view controller: show the main weather to display
+            showWeatherResultsViewController(userPlace: userSelectedPlace )
         }
     }
     
@@ -90,6 +91,14 @@ class DefaultLocationsViewController: UIViewController {
         guard let stateSelectionViewController = storyboard.instantiateViewController(identifier: "StatesViewController") as? StatesViewController else { return }
         stateSelectionViewController.selectedCity = userCity
         self.navigationController?.pushViewController(stateSelectionViewController, animated: true)
+    }
+    
+    func showWeatherResultsViewController(userPlace: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let weatherResultsViewController = storyboard.instantiateViewController(identifier: "WeatherViewController") as? WeatherViewController else { return }
+        weatherResultsViewController.userPlace = userPlace
+        self.navigationController?.pushViewController(weatherResultsViewController, animated: true)
+        
     }
     
     

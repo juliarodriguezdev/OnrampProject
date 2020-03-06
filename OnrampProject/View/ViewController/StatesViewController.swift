@@ -40,6 +40,8 @@ class StatesViewController: UIViewController {
             let stateSearchText = searchTextField.text, !stateSearchText.isEmpty {
             userLocationsViewModel.createLocationWith(city: cityName, place: stateSearchText)
             // push to weather view controller
+            let place = userLocationsViewModel.generateUserPlaceString(city: cityName, place: stateSearchText)
+            showWeatherResultsViewController(userPlace: place)
         } else {
             presentUIHelperAlert(title: "Missing Info", message: "Please select a state, and try again")
             return
@@ -73,6 +75,14 @@ class StatesViewController: UIViewController {
         let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
         alertController.addAction(okayAction)
         self.present(alertController, animated: true)
+    }
+    
+    func showWeatherResultsViewController(userPlace: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let weatherResultsViewController = storyboard.instantiateViewController(identifier: "WeatherViewController") as? WeatherViewController else { return }
+        weatherResultsViewController.userPlace = userPlace
+        self.navigationController?.pushViewController(weatherResultsViewController, animated: true)
+        
     }
 
     /*

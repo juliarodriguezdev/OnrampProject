@@ -33,7 +33,7 @@ class LaunchViewController: UIViewController {
     
     func showMainLocationsViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let mainLocationsViewController = storyboard.instantiateViewController(identifier: "LocationsViewController") as? UserLocationsViewController else { return }
+        guard let mainLocationsViewController = storyboard.instantiateViewController(identifier: "UserLocationsViewController") as? UserLocationsViewController else { return }
         self.navigationController?.pushViewController(mainLocationsViewController, animated: true)
     }
 

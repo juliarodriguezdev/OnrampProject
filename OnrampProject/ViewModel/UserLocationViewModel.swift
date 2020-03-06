@@ -30,9 +30,10 @@ class UserLocationViewModel {
         let newLocation = UserLocation(city: city, place: place)
         let joinedPlace = newLocation.joinedLocation
         userPlaces.append(joinedPlace)
-       saveToPersistentStore()
+        saveToPersistentStore()
         
     }
+    
     
     // MARK: - Delete a location
     func deleteSingleLocationAt(selectedLocation: String) {
@@ -57,7 +58,7 @@ class UserLocationViewModel {
         
     }
     
-    // might not be needed, verify UI 
+    // might not be needed, verify UI
     func deletePersistentStore() {
         defaults.removeObject(forKey: UserDefaultKeys.userLocationsKey)
         // TODO: - test after this is removed if it saves it
@@ -65,6 +66,9 @@ class UserLocationViewModel {
         
     }
     
+    func generateUserPlaceString(city: String, place: String) -> String {
+        return "\(city), \(place)"
+    }
     
 }
 
