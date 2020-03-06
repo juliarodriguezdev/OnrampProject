@@ -9,11 +9,16 @@ import UIKit
 
 class HelperUI {
     
-    static func presentUIHelperAlert(title: String, message: String) {
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
-        alertController.addAction(okayAction)
-        //self.present(alertController, animated: true)
+    static func configShadowForView(viewName: UIView, cornerRadius: CGFloat,  shadowRadius: CGFloat) {
+        viewName.layer.cornerRadius = cornerRadius
+        viewName.layer.shadowColor = UIColor.black.cgColor
+        viewName.layer.shadowOpacity = 0.7
+        viewName.layer.shadowOffset = .zero
+        viewName.layer.shadowRadius = shadowRadius
+        viewName.layer.shadowPath = UIBezierPath(rect: viewName.bounds).cgPath
+        viewName.layer.shouldRasterize = true
+        viewName.layer.rasterizationScale = UIScreen.main.scale
     }
 }
+
+

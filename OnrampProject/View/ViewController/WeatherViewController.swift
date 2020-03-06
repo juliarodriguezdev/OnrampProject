@@ -30,6 +30,7 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         weatherTableView.delegate = self
         weatherTableView.dataSource = self
+        HelperUI.configShadowForView(viewName: backgroundView, cornerRadius: 25, shadowRadius: 15)
 
     }
     
@@ -84,7 +85,7 @@ class WeatherViewController: UIViewController {
 
 extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 78
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -96,7 +97,7 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
         let weather = weatherViewModel.results[indexPath.row]
         
         cell.weatherIcon.image = UIImage(named: weatherViewModel.indexImageName(weather: weather))
-        
+    
         cell.descriptionLabel.text = weatherViewModel.indexDescription(weather: weather)
         cell.timeDateLabel.text = weatherViewModel.indexTimeStamp(weather: weather)
         cell.temperatureLabel.text = weatherViewModel.indexTemperature(weather: weather)
