@@ -11,11 +11,13 @@ class UserLocationViewModel {
     // var to fill view controller content
     
     var buttonTitle = "Add"
+    let defaults = UserDefaults.standard
     
     // MARK: - source of truth
-    var savedLocations: [UserLocation] = [] {
+    var userPlaces: [String] = [] {
         didSet {
-            print("savedLocations has changed, notify delegate")
+            //print("savedLocations has changed, notify delegate")
+            // reload the table view
         }
     }
     
@@ -24,53 +26,42 @@ class UserLocationViewModel {
     }
     
     // MARK: - Create a location
-    func createLocationWith(city: String, country: String) {
-       let newLocation = UserLocation(city: city, country: country)
-       savedLocations.append(newLocation)
+    func createLocationWith(city: String, place: String) {
+        let newLocation = UserLocation(city: city, place: place)
+        let joinedPlace = newLocation.joinedLocation
+        userPlaces.append(joinedPlace)
        saveToPersistentStore()
         
     }
     
-    
-    // MARK: - Update a location
-    func updateLocationAt(location: UserLocation, newCityName: String, newCountryName: String) {
-        if let indexToUpdate = savedLocations.firstIndex(of: location) {
-            print(indexToUpdate)
-            savedLocations[indexToUpdate].city = newCityName
-            savedLocations[indexToUpdate].country = newCountryName
-            
-            saveToPersistentStore()
-            print("savedLocations after update: \(savedLocations)")
-        }
-    }
-    
     // MARK: - Delete a location
-    func deleteSingleLocationAt(selectedLocation: UserLocation) {
+    func deleteSingleLocationAt(selectedLocation: String) {
         
-            if let index = savedLocations.firstIndex(of: selectedLocation) {
+            if let index = userPlaces.firstIndex(of: selectedLocation) {
                 print(index)
-                savedLocations.remove(at: index)
+                userPlaces.remove(at: index)
                 saveToPersistentStore()
             }
     }
     
     // MARK: - Persist data with user defaults
     func saveToPersistentStore() {
-        UserDefaults.userDefaultsObject.set(savedLocations, forKey: UserDefaultKeys.userLocationsKey)
+        defaults.set(userPlaces, forKey: UserDefaultKeys.userLocationsKey)
         
     }
     // MARK: - Read/Fetch a location
     func loadFromPersistnetStore() {
-        let userLocations = UserDefaults.userDefaultsObject.array(forKey: UserDefaultKeys.userLocationsKey) as? [UserLocation] ?? [UserLocation]()
-        savedLocations = userLocations
+        
+        let userFetchedPlaces = defaults.object(forKey: UserDefaultKeys.userLocationsKey) as? [String] ?? [String]()
+        userPlaces = userFetchedPlaces
         
     }
     
     // might not be needed, verify UI 
     func deletePersistentStore() {
-        UserDefaults.userDefaultsObject.removeObject(forKey: UserDefaultKeys.userLocationsKey)
+        defaults.removeObject(forKey: UserDefaultKeys.userLocationsKey)
         // TODO: - test after this is removed if it saves it
-        print(savedLocations)
+        print(userPlaces)
         
     }
     

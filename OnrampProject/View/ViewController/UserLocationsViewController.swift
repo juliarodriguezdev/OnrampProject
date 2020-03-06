@@ -1,5 +1,5 @@
 //
-//  LocationsViewController.swift
+//  UserLocationsViewController.swift
 //  OnrampProject
 //
 //  Created by Julia Rodriguez on 3/4/20.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationsViewController: UIViewController {
+class UserLocationsViewController: UIViewController {
     
     // add view model
     let locationsViewModel = UserLocationViewModel()
@@ -50,20 +50,20 @@ class LocationsViewController: UIViewController {
     }
 
 }
-extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
+extension UserLocationsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locationsViewModel.savedLocations.count
+        return locationsViewModel.userPlaces.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as? LocationsTableViewCell else { return UITableViewCell() }
-        let location = locationsViewModel.savedLocations[indexPath.row]
-        cell.locationLabel.text = "\(location.city), \(location.country)"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as? UserLocationsTableViewCell else { return UITableViewCell() }
+        let location = locationsViewModel.userPlaces[indexPath.row]
+        cell.locationLabel.text = location
         
         return cell
         

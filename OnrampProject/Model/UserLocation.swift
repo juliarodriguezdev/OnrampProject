@@ -9,24 +9,21 @@ import Foundation
 class UserLocation {
 
     var city: String
-    var country: String
-    
-    init(city: String, country: String) {
-        self.city = city
-        self.country = country
-        
+    var place: String
+    var joinedLocation: String {
+        return city + ", " + place
     }
     
-   /* init(_ jsonObject: DefaultLocation) {
-        self.city = jsonObject.city
-        self.country = jsonObject.country
-    } */
     
+    init(city: String, place: String) {
+        self.city = city
+        self.place = place
+    }
 }
 
 extension UserLocation: Equatable {
     static func == (lhs: UserLocation, rhs: UserLocation) -> Bool {
         return lhs.city == rhs.city
-            && lhs.country == rhs.country
+            && lhs.place == rhs.place
     }
 }

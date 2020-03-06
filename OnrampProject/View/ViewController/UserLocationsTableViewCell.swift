@@ -1,5 +1,5 @@
 //
-//  LocationsTableViewCell.swift
+//  UserLocationsTableViewCell.swift
 //  OnrampProject
 //
 //  Created by Julia Rodriguez on 3/4/20.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationsTableViewCell: UITableViewCell {
+class UserLocationsTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var colorStripView: UIView!

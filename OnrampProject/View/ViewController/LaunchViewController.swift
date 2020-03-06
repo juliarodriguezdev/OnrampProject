@@ -12,12 +12,12 @@ class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if UserDefaults.userDefaultsObject.bool(forKey: UserDefaultKeys.firstLaunchKey) == true {
+        if UserDefaults.standard.bool(forKey: UserDefaultKeys.firstLaunchKey) == true {
             print("Second+ Launch")
             showMainLocationsViewController()
         } else {
             print("First Launch")
-            UserDefaults.userDefaultsObject.set(true, forKey: UserDefaultKeys.firstLaunchKey)
+            UserDefaults.standard.set(true, forKey: UserDefaultKeys.firstLaunchKey)
             // navigate to Onboarding VC
             showOnboardingViewController()
             
@@ -33,7 +33,7 @@ class LaunchViewController: UIViewController {
     
     func showMainLocationsViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let mainLocationsViewController = storyboard.instantiateViewController(identifier: "LocationsViewController") as? LocationsViewController else { return }
+        guard let mainLocationsViewController = storyboard.instantiateViewController(identifier: "LocationsViewController") as? UserLocationsViewController else { return }
         self.navigationController?.pushViewController(mainLocationsViewController, animated: true)
     }
 

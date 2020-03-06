@@ -16,7 +16,7 @@ class DefaultLocationsViewController: UIViewController {
     
     var inUSA: Bool?
     
-    var searchResults = [String]()
+    //var searchResults = [String]()
     
     @IBOutlet weak var searchTextField: UITextField!
     
@@ -31,6 +31,7 @@ class DefaultLocationsViewController: UIViewController {
         searchTableView.dataSource = self
         searchTextField.delegate = self
         self.searchTextField.addTarget(self, action: #selector(searching), for: .touchDown)
+        self.addDoneButtonOnKeyboard()
 
     }
     
@@ -40,17 +41,19 @@ class DefaultLocationsViewController: UIViewController {
             presentUIHelperAlert(title: "Missing Info", message: "Invalid loaction entry, please select a city, country")
             return
         }
+        if inUSA == true {
+            showStatesViewController(userCity: selectedLocation)
         
-        // create userLocation object to save to viewmodel
-        let locationArray = selectedLocation.components(separatedBy: ", ")
-        let city = locationArray[0]
-        let country = locationArray[1]
-        // verify source of truth gets updated
-        userLocationsViewModel.createLocationWith(city: city, country: country)
-        
-        // push next view controller: show the main weather to display
-        
-        
+        } else {
+            // create userLocation object to save to viewmodel
+            let locationArray = selectedLocation.components(separatedBy: ", ")
+            let city = locationArray[0]
+            let country = locationArray[1]
+            // verify source of truth gets updated
+            userLocationsViewModel.createLocationWith(city: city, place: country)
+            
+            // push next view controller: show the main weather to display
+        }
     }
     
     @objc func searching(_ textField: UITextField) {
@@ -80,6 +83,13 @@ class DefaultLocationsViewController: UIViewController {
         let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
         alertController.addAction(okayAction)
         self.present(alertController, animated: true)
+    }
+    
+    func showStatesViewController(userCity: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let stateSelectionViewController = storyboard.instantiateViewController(identifier: "StatesViewController") as? StatesViewController else { return }
+        stateSelectionViewController.selectedCity = userCity
+        self.navigationController?.pushViewController(stateSelectionViewController, animated: true)
     }
     
     
@@ -121,6 +131,7 @@ extension DefaultLocationsViewController: UITableViewDataSource, UITableViewDele
         if let checkForUSA = inUSA {
             let results = defaultLocationsViewModel.displaySearchResults(isSearching: isSearching, inUSA: checkForUSA, searchText: searchText ?? "")
             locationToDisplay = results[indexPath.row]
+
         }
         
         cell.textLabel?.text = locationToDisplay
@@ -144,8 +155,7 @@ extension DefaultLocationsViewController: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        guard let searchText = textField.text?.lowercased(),
-            let isInUSA = inUSA
+        guard let searchText = textField.text?.lowercased()
             
             else { return }
         print("Textfield searchText is: \(searchText)")
@@ -156,7 +166,7 @@ extension DefaultLocationsViewController: UITextFieldDelegate {
             isSearching = true
         }
         // populates when searching
-        searchResults = defaultLocationsViewModel.displaySearchResults(isSearching: isSearching, inUSA: isInUSA, searchText: searchText)
+        //searchResults = defaultLocationsViewModel.displaySearchResults(isSearching: isSearching, inUSA: isInUSA, searchText: searchText)
         self.searchTableView.reloadData()
         
     }

@@ -24,7 +24,7 @@ class OnboardingViewModel {
       }
     
     func setFirstLaunchToTrue() {
-        UserDefaults.userDefaultsObject.set(true, forKey: UserDefaultKeys.firstLaunchKey)
+        UserDefaults.standard.set(true, forKey: UserDefaultKeys.firstLaunchKey)
     }
     
     

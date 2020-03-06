@@ -11,7 +11,3 @@ struct UserDefaultKeys {
     static let userLocationsKey = "userSavedLocations"
     static let firstLaunchKey = "First App Launch"
 }
-
-extension UserDefaults {
-    static let userDefaultsObject = UserDefaults.standard
-}
