@@ -15,9 +15,7 @@ class DefaultLocationsViewController: UIViewController {
     var isSearching = false
     
     var inUSA: Bool?
-    
-    //var searchResults = [String]()
-    
+        
     @IBOutlet weak var searchTextField: UITextField!
     
     @IBOutlet weak var searchTableView: UITableView!

@@ -21,7 +21,10 @@ class UserLocationsViewController: UIViewController {
         locationsTableView.delegate = self
         locationsTableView.dataSource = self
         updateUI()
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
     }
     
     @IBAction func addButtonTapped(_ sender: Any) {
@@ -66,10 +69,19 @@ extension UserLocationsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as? UserLocationsTableViewCell else { return UITableViewCell() }
         let location = locationsViewModel.userPlaces[indexPath.row]
+        //cell.place = location
+        cell.loadTemperatureData(withPlace: location)
         cell.locationLabel.text = location
         
         return cell
         
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let location = locationsViewModel.userPlaces[indexPath.row]
+            locationsViewModel.deleteSingleLocationAt(selectedLocation: location)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
     

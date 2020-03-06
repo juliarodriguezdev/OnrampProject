@@ -97,24 +97,24 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TT-3K-TvS" userLabel="color indicator">
-                                                    <rect key="frame" x="20" y="8.5" width="13" height="93.5"/>
+                                                    <rect key="frame" x="20" y="11" width="13" height="88"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4q-B5-EuC" userLabel="location">
-                                                    <rect key="frame" x="43" y="44.5" width="42" height="21"/>
+                                                    <rect key="frame" x="53" y="44.5" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OV1-9X-7YV" userLabel="temp">
-                                                    <rect key="frame" x="311" y="44.5" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="296" y="40.5" width="57" height="29"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Q4q-B5-EuC" firstAttribute="leading" secondItem="7TT-3K-TvS" secondAttribute="trailing" constant="10" id="2VS-mj-2uy"/>
+                                                <constraint firstItem="Q4q-B5-EuC" firstAttribute="leading" secondItem="7TT-3K-TvS" secondAttribute="trailing" constant="20" id="2VS-mj-2uy"/>
                                                 <constraint firstItem="7TT-3K-TvS" firstAttribute="leading" secondItem="Fxm-Wh-5ZI" secondAttribute="leadingMargin" id="4mc-bY-ueT"/>
                                                 <constraint firstItem="Q4q-B5-EuC" firstAttribute="centerY" secondItem="Fxm-Wh-5ZI" secondAttribute="centerY" id="MoC-hf-Dr4"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="OV1-9X-7YV" secondAttribute="trailing" id="ad0-9J-2nb"/>
@@ -123,7 +123,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
-                                            <constraint firstItem="7TT-3K-TvS" firstAttribute="height" secondItem="B4L-HC-NA1" secondAttribute="height" multiplier="0.85" id="Bz8-lG-bFD"/>
+                                            <constraint firstItem="7TT-3K-TvS" firstAttribute="height" secondItem="B4L-HC-NA1" secondAttribute="height" multiplier="0.8" id="Bz8-lG-bFD"/>
                                             <constraint firstItem="7TT-3K-TvS" firstAttribute="width" secondItem="B4L-HC-NA1" secondAttribute="width" multiplier="0.035" id="caU-9e-QbY"/>
                                         </constraints>
                                         <connections>

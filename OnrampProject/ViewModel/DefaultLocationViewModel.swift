@@ -18,7 +18,7 @@ class DefaultLocationViewModel {
     
     private var finalRawLocations: [DefaultLocation] {
         // test "("
-        return rawLocations.filter({$0.city != ""}).filter({$0.city != "="})
+        return rawLocations.filter({$0.city != ""}).filter({$0.city != "-"})
     }
     
     private var usaLocations: [DefaultLocation] {

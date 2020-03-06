@@ -38,11 +38,11 @@ class UserLocationViewModel {
     // MARK: - Delete a location
     func deleteSingleLocationAt(selectedLocation: String) {
         
-            if let index = userPlaces.firstIndex(of: selectedLocation) {
-                print(index)
-                userPlaces.remove(at: index)
-                saveToPersistentStore()
-            }
+        guard let index = userPlaces.firstIndex(of: selectedLocation) else { return }
+        print(index)
+        userPlaces.remove(at: index)
+        saveToPersistentStore()
+        
     }
     
     // MARK: - Persist data with user defaults

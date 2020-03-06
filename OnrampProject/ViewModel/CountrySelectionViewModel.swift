@@ -28,16 +28,12 @@ class CountrySelectionViewModel {
     }
     
     func fetchIsUSASelected() -> Bool {
+        print("FetchIsUSASelected: \(countryModel.isUSA)")
         return countryModel.isUSA
         
     }
-}
-
-extension CountrySelectionViewModel: CountryViewControllerDelegate {
-    
-    func updateCountrySelection(sender: CountrySelectionViewController, isUSA: Bool) {
-        sender.delegate = self
-        if isUSA {
+    func updateCountryModelSelection(isInUSA: Bool) {
+        if isInUSA == true {
             countryModel.isUSA = true
         } else {
             countryModel.isUSA = false

@@ -7,16 +7,10 @@
 
 import UIKit
 
-protocol CountryViewControllerDelegate: class {
-    func updateCountrySelection(sender: CountrySelectionViewController, isUSA: Bool)
-}
-
 class CountrySelectionViewController: UIViewController {
     
     let countryViewModel = CountrySelectionViewModel()
-    
-    weak var delegate: CountryViewControllerDelegate?
-    
+        
     @IBOutlet weak var selectionLabel: UILabel!
     
     @IBOutlet weak var selectionSegmentedControl: UISegmentedControl!
@@ -53,10 +47,10 @@ class CountrySelectionViewController: UIViewController {
     
     func updateCountrySelection() {
         if selectionSegmentedControl.selectedSegmentIndex == 0 {
-            delegate?.updateCountrySelection(sender: self, isUSA: true)
+            countryViewModel.updateCountryModelSelection(isInUSA: true)
             print("Delegate: Country is USA")
         } else {
-            delegate?.updateCountrySelection(sender: self, isUSA: false)
+            countryViewModel.updateCountryModelSelection(isInUSA: false)
             print("Delegate: Country is Interational")
         }
     }

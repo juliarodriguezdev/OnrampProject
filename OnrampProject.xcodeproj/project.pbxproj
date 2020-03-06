@@ -15,6 +15,8 @@
 		6030FC8723FF0C7A007F0901 /* OnrampProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030FC8623FF0C7A007F0901 /* OnrampProjectTests.swift */; };
 		6030FC9223FF0C7A007F0901 /* OnrampProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6030FC9123FF0C7A007F0901 /* OnrampProjectUITests.swift */; };
 		6A16444524117C4A00A13BDB /* StatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A16444424117C4A00A13BDB /* StatesViewController.swift */; };
+		6A1F5EBD24120CD400353FAA /* StyleGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A1F5EBC24120CD400353FAA /* StyleGuide.swift */; };
+		6A1F5EC024120D5100353FAA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A1F5EBF24120D5100353FAA /* Colors.xcassets */; };
 		6A211D4C2410AA73003964E9 /* UserLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A211D4B2410AA73003964E9 /* UserLocationsViewController.swift */; };
 		6A2500A7241074B200EC1FE5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2500A6241074B200EC1FE5 /* OnboardingViewController.swift */; };
 		6A2958F52410B01100BB4FD1 /* DefaultLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2958F42410B01100BB4FD1 /* DefaultLocationsViewController.swift */; };
@@ -73,6 +75,8 @@
 		6030FC9123FF0C7A007F0901 /* OnrampProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnrampProjectUITests.swift; sourceTree = "<group>"; };
 		6030FC9323FF0C7A007F0901 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A16444424117C4A00A13BDB /* StatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesViewController.swift; sourceTree = "<group>"; };
+		6A1F5EBC24120CD400353FAA /* StyleGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleGuide.swift; sourceTree = "<group>"; };
+		6A1F5EBF24120D5100353FAA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		6A211D4B2410AA73003964E9 /* UserLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationsViewController.swift; sourceTree = "<group>"; };
 		6A2500A6241074B200EC1FE5 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		6A2958F42410B01100BB4FD1 /* DefaultLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationsViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 				6ABFAA3E2410793B00E7A737 /* UserDefaults.swift */,
 				6A3329972410CF4B000DBCB1 /* HelperUI.swift */,
 				6A39D1E624117E1A001368ED /* StateHelper.swift */,
+				6A1F5EBC24120CD400353FAA /* StyleGuide.swift */,
 			);
 			path = OnrampProject;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 				6030FC7823FF0C7A007F0901 /* Assets.xcassets */,
 				6A82F587240DE2AE0028B7D4 /* city.list.json */,
 				6030FC7D23FF0C7A007F0901 /* Info.plist */,
+				6A1F5EBF24120D5100353FAA /* Colors.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -343,6 +349,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A1F5EC024120D5100353FAA /* Colors.xcassets in Resources */,
 				6030FC7C23FF0C7A007F0901 /* LaunchScreen.storyboard in Resources */,
 				6A82F588240DE2AE0028B7D4 /* city.list.json in Resources */,
 				6030FC7923FF0C7A007F0901 /* Assets.xcassets in Resources */,
@@ -379,6 +386,7 @@
 				6A39D1E724117E1A001368ED /* StateHelper.swift in Sources */,
 				6A82F597240F74E40028B7D4 /* UserLocation.swift in Sources */,
 				6A39D1E324117DE0001368ED /* StatesViewModel.swift in Sources */,
+				6A1F5EBD24120CD400353FAA /* StyleGuide.swift in Sources */,
 				6A980EFA2410AB4800E31FCC /* UserLocationsTableViewCell.swift in Sources */,
 				6A16444524117C4A00A13BDB /* StatesViewController.swift in Sources */,
 				6A4640DD24105198000F9E37 /* OnboardingViewModel.swift in Sources */,
