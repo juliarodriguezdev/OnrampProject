@@ -38,7 +38,7 @@ From this view controller, the "Add" Button leads a user to create a new locatio
 
 • OpenWeatherMap REST API, decode JSON data for a 5 day weather forecast at a specific city, state/country.
 
-• Several UIView/UIControl subclasses which include UITableViews, UISegmentedControl, UIButtons, UITextFields, UIStackViews, UIImageView, UILabel, and UIAlertControl).
+• Several UIView/UIControl subclasses which include UITableViews, UISegmentedControl, UIButtons, UITextFields, UIStackViews, UIImageView, UILabel, and UIAlertControl.
 
 • Used UserDefaults for data persistence. Stored users saved locations and first launch of app status for onboarding purposes.
 
@@ -61,8 +61,7 @@ weather at specific locations.
 • UIButton 
 
 ### UserLocationsViewController 
-Displayed the stored locations from User Defaults, acts as the 'Home ViewController'. Here a tableview cell can be selected and the weather 
-of that selected location will be displayed. Or a new location can be added. 
+Displayed the stored locations from User Defaults, acts as the 'Home ViewController'. OpenWeatherMap REST API call is executed here to dispay preview the current temperature and update the UIView color (vertical rectangle) to match the temperature. A tableview cell can be selected and will be navigated to the weather of that selected location.  Also, a new location can be added in this view controller.
 
 • UITableView
 
@@ -105,7 +104,7 @@ in the tableview.
 
 ### WeatherViewController 
 The weather is displayed, the top of the view is the current weather. The weather results in the tableview
-are 5 day forecast, every 3 hour weather. 
+are 5 day forecast, every 3 hour weather. OpenWeatherMap REST API called and used to display UI elements. 
 
 • UILabel(5)
 
